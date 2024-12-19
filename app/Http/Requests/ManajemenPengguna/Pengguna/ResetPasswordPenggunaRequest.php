@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\ManajemenPengguna\PeranHakAkses\Peran;
+namespace App\Http\Requests\ManajemenPengguna\Pengguna;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
-class KelolaHakAksesPeranRequest extends FormRequest
+class ResetPasswordPenggunaRequest extends FormRequest
 {
-    protected $errorBag = 'kelolaHakAkses';
+    protected $errorBag = 'resetPassword';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +25,7 @@ class KelolaHakAksesPeranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'hak_akses'   => 'array',
-            'hak_akses.*' => 'string|exists:permissions,name'
+            'password' => 'required|string|min:8|max:255'
         ];
     }
 
@@ -37,8 +37,17 @@ class KelolaHakAksesPeranRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'hak_akses'   => 'Hak Akses',
-            'hak_akses.*' => 'Hak Akses'
+            'password' => 'Password'
         ];
+    }
+
+    /**
+     * Handle a passed validation attempt.
+     */
+    protected function passedValidation(): void
+    {
+        $this->merge([
+            'password' => Hash::make($this->input('password')),
+        ]);
     }
 }

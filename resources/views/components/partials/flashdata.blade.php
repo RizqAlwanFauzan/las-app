@@ -10,7 +10,7 @@
     </div>
 @endif
 
-@if (in_array(true, [$errors->hasBag('store'), $errors->hasBag('update'), $errors->hasBag('kelolaHakAkses')]))
+@if (in_array(true, [$errors->hasBag('store'), $errors->hasBag('update'), $errors->hasBag('kelolaHakAkses'), $errors->hasBag('resetPassword')]))
     <div class="d-none toastr" type="error">
         Data gagal disimpan, periksa inputan Anda!
     </div>

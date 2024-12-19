@@ -8,8 +8,8 @@ $(function () {
         ]
     };
 
-    const dataTable = $("#table-peran").DataTable(konfigurasiDataTable);
-    const request = '/manajemen-pengguna/peran-hak-akses/peran/';
+    const dataTable = $("#table-pengguna").DataTable(konfigurasiDataTable);
+    const request = '/manajemen-pengguna/pengguna/';
 
     $(document).on('click', '[data-target^="#modal-"]', function () {
         const id = $(this).data('id');
@@ -30,22 +30,23 @@ $(function () {
 
     const isiModal = (modalId, response) => {
         const modal = $(modalId);
-        const { id, name, guard_name, permissions } = response;
+        const { id, name, email, roles } = response;
         const actions = {
-            '#modal-kelola-hak-akses': () => {
-                modal.find('form').attr('action', url(`${request}kelola-hak-akses/${id}`));
-                modal.find('#name').text(name);
-                permissions.map(item => modal.find(`[name="hak_akses[]"][value="${item.name}"]`).prop('checked', true));
+            '#modal-reset': () => {
+                modal.find('form').attr('action', url(`${request}reset-password/${id}`));
             },
             '#modal-detail': () => {
                 modal.find('#id').text(id);
-                modal.find('#nama_peran').text(name);
-                modal.find('#nama_pengaman').text(guard_name);
+                modal.find('#name').text(name);
+                modal.find('#email').text(email);
+                modal.find('#peran').html(roles.map(role => `<span class="badge badge-light">${role.name}</span>`).join(' '));
             },
             '#modal-ubah': () => {
                 modal.find('form').attr('action', url(`${request}${id}`));
                 modal.find('[name="id"]').val(id);
                 modal.find('[name="name"]').val(name);
+                modal.find('[name="email"]').val(email);
+                modal.find('[name="peran[]"]').val(roles.map(role => role.name)).trigger('change');
             },
             '#modal-hapus': () => {
                 modal.find('form').attr('action', url(`${request}${id}`));
@@ -75,4 +76,8 @@ $(function () {
         modalUbah.find('form').attr('action', url(`${request}${id}`));
         setTimeout(() => modalUbah.modal('show'), 500);
     }
+
+    $(document).on('shown.bs.modal', '#modal-ubah', function () {
+        $(this).find('select.select2bs4').trigger('change');
+    });
 });

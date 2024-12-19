@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ManajemenPengguna\PenggunaController;
 use App\Http\Controllers\ManajemenPengguna\PeranHakAkses\HakAksesController;
 use App\Http\Controllers\ManajemenPengguna\PeranHakAkses\PeranController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::prefix('manajemen-pengguna')->name('manajemen-pengguna.')->group(function () {
+    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
+    Route::get('/pengguna/{user}', [PenggunaController::class, 'show'])->name('pengguna.show');
+    Route::post('/pengguna', [PenggunaController::class, 'store'])->name('pengguna.store');
+    Route::put('/pengguna/{user}', [PenggunaController::class, 'update'])->name('pengguna.update');
+    Route::delete('/pengguna/{user}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
+    Route::put('/pengguna/reset-password/{user}', [PenggunaController::class, 'resetPassword'])->name('peran.reset-password');
+
     Route::prefix('peran-hak-akses')->name('peran-hak-akses.')->group(function () {
         Route::get('/peran', [PeranController::class, 'index'])->name('peran');
         Route::get('/peran/{role}', [PeranController::class, 'show'])->name('peran.show');
