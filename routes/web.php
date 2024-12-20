@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\DaftarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ManajemenPengguna\PenggunaController;
 use App\Http\Controllers\ManajemenPengguna\PeranHakAkses\HakAksesController;
@@ -9,6 +10,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar');
+    Route::post('/daftar', [DaftarController::class, 'store'])->name('daftar.store');
+});
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

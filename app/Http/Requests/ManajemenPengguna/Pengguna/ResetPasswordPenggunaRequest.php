@@ -47,7 +47,7 @@ class ResetPasswordPenggunaRequest extends FormRequest
     protected function passedValidation(): void
     {
         $this->merge([
-            'password' => Hash::make($this->input('password')),
+            'password' => Hash::make($this->input('password'))
         ]);
     }
 }

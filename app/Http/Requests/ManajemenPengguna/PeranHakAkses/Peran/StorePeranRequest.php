@@ -24,7 +24,7 @@ class StorePeranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:roles,name',
+            'name' => 'required|string|max:255|unique:roles,name'
         ];
     }
 
@@ -36,7 +36,7 @@ class StorePeranRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Nama Peran',
+            'name' => 'Nama Peran'
         ];
     }
 }
