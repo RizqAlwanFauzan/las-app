@@ -57,7 +57,7 @@
         <div class="card-footer">
             <p class="mb-0 text-center">
                 Sudah memiliki akun?
-                <a href="#" class="text-center">Masuk sekarang!</a>
+                <a href="{{ route('auth.masuk') }}" class="text-center">Masuk sekarang!</a>
             </p>
         </div>
     </div>
