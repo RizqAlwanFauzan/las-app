@@ -30,7 +30,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                {{-- <li class="nav-header">Manajemen Pengguna</li>
+                <li class="nav-header">Manajemen Pengguna</li>
                 <li class="nav-item">
                     <a href="{{ route('manajemen-pengguna.pengguna') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.pengguna') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-shield"></i>
@@ -61,7 +61,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
             </ul>
         </nav>
     </div>
