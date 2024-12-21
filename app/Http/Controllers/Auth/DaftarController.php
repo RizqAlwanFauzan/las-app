@@ -24,6 +24,6 @@ class DaftarController extends Controller
         $validated = $request->all();
         $user = User::create($validated);
         $user->assignRole('user');
-        return redirect()->back()->with('success', 'Berhasil mendaftarkan akun baru');
+        return redirect()->route('auth.masuk')->with('success', 'Berhasil mendaftarkan akun baru');
     }
 }
