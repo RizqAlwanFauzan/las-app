@@ -2,10 +2,14 @@ $(function () {
     const konfigurasiDataTable = {
         scrollX: true,
         scrollCollapse: true,
-        scrollY: '56.9vh',
-        columnDefs: [
-            { targets: [2], orderable: false, searchable: false }
-        ]
+        scrollY: '56.9vh'
+    };
+
+    const indexTarget = target('Menu');
+    if (indexTarget >= 0) {
+        konfigurasiDataTable.columnDefs = [{
+            targets: indexTarget, orderable: false, searchable: false
+        }];
     };
 
     const dataTable = $("#table-pengguna").DataTable(konfigurasiDataTable);
@@ -17,6 +21,12 @@ $(function () {
         tampilkanLoading(modalId);
         ambilData(id, modalId);
     });
+
+    function target(key) {
+        return $('table th').map(function () {
+            return $(this).text().trim();
+        }).get().indexOf(key);
+    };
 
     const ambilData = (id, modalId) => {
         $.ajax({
