@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\ManajemenPengguna\Pengguna;
+namespace App\Http\Requests\Auth\Daftar;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
-class StorePenggunaRequest extends FormRequest
+class StoreDaftarRequest extends FormRequest
 {
     protected $errorBag = 'store';
 
@@ -25,11 +25,10 @@ class StorePenggunaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|max:255',
-            'peran'    => 'required|array',
-            'peran.*'  => 'required|string|exists:roles,name'
+            'name'             => 'required|string|max:255',
+            'email'            => 'required|string|email|max:255|unique:users,email',
+            'password'         => 'required|string|min:8|max:255',
+            'confirm_password' => 'required|string|same:password'
         ];
     }
 
@@ -41,11 +40,10 @@ class StorePenggunaRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name'     => 'Nama Lengkap',
-            'email'    => 'Email',
-            'password' => 'Password',
-            'peran'    => 'Peran',
-            'peran.*'  => 'Peran'
+            'name'             => 'Nama Lengkap',
+            'email'            => 'Email',
+            'password'         => 'Password',
+            'confirm_password' => 'Konfirmasi Password'
         ];
     }
 
@@ -57,5 +55,7 @@ class StorePenggunaRequest extends FormRequest
         $this->merge([
             'password' => Hash::make($this->input('password'))
         ]);
+
+        $this->request->remove('confirm_password');
     }
 }
