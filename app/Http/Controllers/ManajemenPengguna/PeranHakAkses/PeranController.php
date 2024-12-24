@@ -16,12 +16,13 @@ class PeranController extends Controller
 {
     public function index(): View
     {
-        $peran    = Role::orderBy('updated_at', 'desc')->get();
-        $hakAkses = Permission::orderBy('updated_at', 'asc')->pluck('name', 'id');
-        $data = [
-            'title'    => 'Peran',
-            'peran'    => $peran,
-            'hakAkses' => $hakAkses
+        $peran        = Role::orderBy('updated_at', 'desc')->get();
+        $hakAkses     = Permission::orderBy('updated_at', 'asc')->get();
+        $hakAksesGrup = $hakAkses->groupBy(fn($permission) => explode('.', $permission->name)[0])->map(fn($group) => $group->pluck('name', 'id'));
+        $data         = [
+            'title'        => 'Peran',
+            'peran'        => $peran,
+            'hakAksesGrup' => $hakAksesGrup
         ];
 
         return view('pages.manajemen-pengguna.peran-hak-akses.peran', $data);
