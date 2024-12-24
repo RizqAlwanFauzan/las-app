@@ -1,7 +1,7 @@
 <x-layouts.adminpanel :title="$title">
-    @can('hak-akses')
+    @can('hak-akses.')
         <div class="row">
-            @can('tambah-hak-akses')
+            @can('hak-akses.tambah')
                 <div class="col-12 col-md-4">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             @endcan
-            @can('daftar-hak-akses')
+            @can('hak-akses.daftar')
                 <div class="col-12 col-md-8">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -38,7 +38,7 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Nama Hak Akses</th>
-                                        @canany(['detail-hak-akses', 'ubah-hak-akses', 'hapus-hak-akses'])
+                                        @canany(['hak-akses.detail', 'hak-akses.ubah', 'hak-akses.hapus'])
                                             <th>Menu</th>
                                         @endcanany
                                     </tr>
@@ -48,15 +48,15 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
-                                            @canany(['detail-hak-akses', 'ubah-hak-akses', 'hapus-hak-akses'])
+                                            @canany(['hak-akses.detail', 'hak-akses.ubah', 'hak-akses.hapus'])
                                                 <td class="text-center">
-                                                    @can('detail-hak-akses')
+                                                    @can('hak-akses.detail')
                                                         <button type="button" class="btn btn-info btn-xs btn-menu" data-toggle="modal" data-target="#modal-detail" data-id="{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                                     @endcan
-                                                    @can('ubah-hak-akses')
+                                                    @can('hak-akses.ubah')
                                                         <button type="button" class="btn btn-warning btn-xs btn-menu text-white" data-toggle="modal" data-target="#modal-ubah" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
                                                     @endcan
-                                                    @can('hapus-hak-akses')
+                                                    @can('hak-akses.hapus')
                                                         <button type="button" class="btn btn-danger btn-xs btn-menu" data-toggle="modal" data-target="#modal-hapus" data-id="{{ $item->id }}"><i class="fas fa-trash-alt"></i></button>
                                                     @endcan
                                                 </td>
@@ -71,7 +71,7 @@
             @endcan
         </div>
 
-        @can('detail-hak-akses')
+        @can('hak-akses.detail')
             <div class="modal fade" id="modal-detail">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -105,7 +105,7 @@
             </div>
         @endcan
 
-        @can('ubah-hak-akses')
+        @can('hak-akses.ubah')
             <div class="modal fade" id="modal-ubah">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -138,7 +138,7 @@
             </div>
         @endcan
 
-        @can('hapus-hak-akses')
+        @can('hak-akses.hapus')
             <div class="modal fade" id="modal-hapus">
                 <div class="modal-dialog">
                     <div class="modal-content">

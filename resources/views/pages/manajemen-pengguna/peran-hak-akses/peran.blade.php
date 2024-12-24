@@ -1,7 +1,7 @@
 <x-layouts.adminpanel :title="$title">
     @can('peran')
         <div class="row">
-            @can('tambah-peran')
+            @can('peran.tambah')
                 <div class="col-12 col-md-4">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             @endcan
-            @can('daftar-peran')
+            @can('peran.daftar')
                 <div class="col-12 col-md-8">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -38,7 +38,7 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Nama Peran</th>
-                                        @canany(['kelola-hak-akses-peran', 'detail-peran', 'ubah-peran', 'hapus-peran'])
+                                        @canany(['peran.kelola-hak-akses', 'peran.detail', 'peran.ubah', 'peran.hapus'])
                                             <th>Menu</th>
                                         @endcanany
                                     </tr>
@@ -48,18 +48,18 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
-                                            @canany(['kelola-hak-akses-peran', 'detail-peran', 'ubah-peran', 'hapus-peran'])
+                                            @canany(['peran.kelola-hak-akses', 'peran.detail', 'peran.ubah', 'peran.hapus'])
                                                 <td class="text-center">
-                                                    @can('kelola-hak-akses-peran')
+                                                    @can('peran.kelola-hak-akses')
                                                         <button type="button" class="btn btn-success btn-xs btn-menu" data-toggle="modal" data-target="#modal-kelola-hak-akses" data-id="{{ $item->id }}"><i class="fas fa-user-tag"></i></button>
                                                     @endcan
-                                                    @can('detail-peran')
+                                                    @can('peran.detail')
                                                         <button type="button" class="btn btn-info btn-xs btn-menu" data-toggle="modal" data-target="#modal-detail" data-id="{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                                     @endcan
-                                                    @can('ubah-peran')
+                                                    @can('peran.ubah')
                                                         <button type="button" class="btn btn-warning btn-xs btn-menu text-white" data-toggle="modal" data-target="#modal-ubah" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
                                                     @endcan
-                                                    @can('hapus-peran')
+                                                    @can('peran.hapus')
                                                         <button type="button" class="btn btn-danger btn-xs btn-menu" data-toggle="modal" data-target="#modal-hapus" data-id="{{ $item->id }}"><i class="fas fa-trash-alt"></i></button>
                                                     @endcan
                                                 </td>
@@ -74,7 +74,7 @@
             @endcan
         </div>
 
-        @can('kelola-hak-akses-peran')
+        @can('peran.kelola-hak-akses')
             <div class="modal fade" id="modal-kelola-hak-akses">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -119,7 +119,7 @@
             </div>
         @endcan
 
-        @can('detail-peran')
+        @can('peran.detail')
             <div class="modal fade" id="modal-detail">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -153,7 +153,7 @@
             </div>
         @endcan
 
-        @can('ubah-peran')
+        @can('peran.ubah')
             <div class="modal fade" id="modal-ubah">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -186,7 +186,7 @@
             </div>
         @endcan
 
-        @can('hapus-peran')
+        @can('peran.hapus')
             <div class="modal fade" id="modal-hapus">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -215,5 +215,4 @@
         @section('js')
             <script src="{{ asset('assets/myassets/dist/js/pages/manajemen-pengguna/peran-hak-akses/peran.js') }}"></script>
         @endsection
-    @endcan
-</x-layouts.adminpanel>
+    </x-layouts.adminpanel>
