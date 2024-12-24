@@ -74,21 +74,23 @@
                             <li class="list-group-item">
                                 <strong class="text-muted"><i class="fas fa-key mr-1"></i> <span class="text-lg" id="name"></span></strong>
                             </li>
-                            <li class="list-group-item">
-                                <strong class="text-muted"><i class="fas fa-tags mr-1 mb-2"></i> Pilih Hak Akses</strong>
-                                <div class="row">
-                                    @foreach ($hakAkses as $id => $name)
-                                        <div class="col-6 col-lg-3">
-                                            <div class="form-group mb-0">
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{ $id }}" name="hak_akses[]" value="{{ $name }}">
-                                                    <label class="custom-control-label" for="customSwitch{{ $id }}">{{ $name }}</label>
+                            @foreach ($hakAksesGrup as $grup => $hakAkses)
+                                <li class="list-group-item">
+                                    <strong class="text-muted text-capitalize"><i class="fas fa-tags mr-1 mb-2"></i> {{ $grup }}</strong>
+                                    <div class="row">
+                                        @foreach ($hakAkses as $id => $name)
+                                            <div class="col-6 col-lg-3">
+                                                <div class="form-group mb-0">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="customSwitch{{ $id }}" name="hak_akses[]" value="{{ $name }}">
+                                                        <label class="custom-control-label" for="customSwitch{{ $id }}">{{ $name }}</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </li>
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="modal-footer justify-content-between">
