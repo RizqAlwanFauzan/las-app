@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\ManajemenPengguna\PeranHakAkses\HakAkses;
+namespace App\Http\Requests\Auth\Masuk;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreHakAksesRequest extends FormRequest
+class AuthenticateMasukRequest extends FormRequest
 {
-    protected $errorBag = 'store';
+    protected $errorBag = 'authenticate';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class StoreHakAksesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:permissions,name'
+            'email'            => 'required|string|email',
+            'password'         => 'required|string'
         ];
     }
 
@@ -36,7 +37,8 @@ class StoreHakAksesRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Nama Hak Akses'
+            'email'            => 'Email',
+            'password'         => 'Password'
         ];
     }
 }

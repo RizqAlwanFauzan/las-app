@@ -9,7 +9,11 @@
                 <img src="{{ asset('assets/adminlte/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Rizq Alwan Fauzan</a>
+                <a href="#" class="d-block">
+                    @auth
+                        {{ auth()->user()->name }}
+                    @endauth
+                </a>
             </div>
         </div>
         <div class="form-inline">
@@ -24,44 +28,54 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="nav-header">Manajemen Pengguna</li>
-                <li class="nav-item">
-                    <a href="{{ route('manajemen-pengguna.pengguna') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.pengguna') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user-shield"></i>
-                        <p>Pengguna</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.peran', 'manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.peran', 'manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user-tag"></i>
-                        <p>
-                            Peran & Hak Akses
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                @can('dashboard')
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                @endcan
+                @canany(['pengguna', 'peran', 'hak-akses'])
+                    <li class="nav-header">Manajemen Pengguna</li>
+                    @can('pengguna')
                         <li class="nav-item">
-                            <a href="{{ route('manajemen-pengguna.peran-hak-akses.peran') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.peran-hak-akses.peran') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Peran</p>
+                            <a href="{{ route('manajemen-pengguna.pengguna') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.pengguna') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user-shield"></i>
+                                <p>Pengguna</p>
                             </a>
                         </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('manajemen-pengguna.peran-hak-akses.hak-akses') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.peran-hak-akses.hak-akses') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hak Akses</p>
+                    @endcan
+                    @canany(['peran', 'hak-akses'])
+                        <li class="nav-item {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.peran', 'manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.peran', 'manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user-tag"></i>
+                                <p>
+                                    Peran & Hak Akses
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                @can('peran')
+                                    <li class="nav-item">
+                                        <a href="{{ route('manajemen-pengguna.peran-hak-akses.peran') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.peran-hak-akses.peran') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Peran</p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('hak-akses')
+                                    <li class="nav-item">
+                                        <a href="{{ route('manajemen-pengguna.peran-hak-akses.hak-akses') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.peran-hak-akses.hak-akses') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Hak Akses</p>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </li>
-                    </ul>
-                </li>
+                    @endcanany
+                @endcanany
             </ul>
         </nav>
     </div>
