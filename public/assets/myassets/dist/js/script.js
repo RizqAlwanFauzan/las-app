@@ -3,6 +3,7 @@ $(function () {
         $(this).find('.is-invalid').removeClass('is-invalid');
         $(this).find('.invalid-feedback').remove();
         $(this).find('input:not([type="hidden"])').val('');
+        $(this).find('select').val('').trigger('change');
         $(this).find('textarea').text('');
     });
 
