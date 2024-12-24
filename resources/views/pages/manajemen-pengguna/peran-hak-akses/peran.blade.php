@@ -215,5 +215,4 @@
         @section('js')
             <script src="{{ asset('assets/myassets/dist/js/pages/manajemen-pengguna/peran-hak-akses/peran.js') }}"></script>
         @endsection
-    @endcan
-</x-layouts.adminpanel>
+    </x-layouts.adminpanel>
