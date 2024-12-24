@@ -25,24 +25,24 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middl
 
 Route::prefix('manajemen-pengguna')->name('manajemen-pengguna.')->middleware('auth')->group(function () {
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna')->middleware('permission:pengguna');
-    Route::get('/pengguna/{user}', [PenggunaController::class, 'show'])->name('pengguna.show')->middleware('permission:detail-pengguna');
-    Route::post('/pengguna', [PenggunaController::class, 'store'])->name('pengguna.store')->middleware('permission:tambah-pengguna');
-    Route::put('/pengguna/{user}', [PenggunaController::class, 'update'])->name('pengguna.update')->middleware('permission:ubah-pengguna');
-    Route::delete('/pengguna/{user}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy')->middleware('permission:hapus-pengguna');
-    Route::put('/pengguna/reset-password/{user}', [PenggunaController::class, 'resetPassword'])->name('pengguna.reset-password')->middleware('permission:reset-password-pengguna');
+    Route::get('/pengguna/{user}', [PenggunaController::class, 'show'])->name('pengguna.show')->middleware('permission:pengguna.detail');
+    Route::post('/pengguna', [PenggunaController::class, 'store'])->name('pengguna.store')->middleware('permission:pengguna.tambah');
+    Route::put('/pengguna/{user}', [PenggunaController::class, 'update'])->name('pengguna.update')->middleware('permission:pengguna.ubah');
+    Route::delete('/pengguna/{user}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy')->middleware('permission:pengguna.hapus');
+    Route::put('/pengguna/reset-password/{user}', [PenggunaController::class, 'resetPassword'])->name('pengguna.reset-password')->middleware('permission:pengguna.reset-password');
 
     Route::prefix('peran-hak-akses')->name('peran-hak-akses.')->group(function () {
         Route::get('/peran', [PeranController::class, 'index'])->name('peran')->middleware('permission:peran');
-        Route::get('/peran/{role}', [PeranController::class, 'show'])->name('peran.show')->middleware('permission:detail-peran');
-        Route::post('/peran', [PeranController::class, 'store'])->name('peran.store')->middleware('permission:tambah-peran');
-        Route::put('/peran/{role}', [PeranController::class, 'update'])->name('peran.update')->middleware('permission:ubah-peran');
-        Route::delete('/peran/{role}', [PeranController::class, 'destroy'])->name('peran.destroy')->middleware('permission:hapus-peran');
-        Route::put('/peran/kelola-hak-akses/{role}', [PeranController::class, 'kelolaHakAkses'])->name('peran.kelola-hak-akses')->middleware('permission:kelola-hak-akses-peran');
+        Route::get('/peran/{role}', [PeranController::class, 'show'])->name('peran.show')->middleware('permission:peran.detail');
+        Route::post('/peran', [PeranController::class, 'store'])->name('peran.store')->middleware('permission:peran.tambah');
+        Route::put('/peran/{role}', [PeranController::class, 'update'])->name('peran.update')->middleware('permission:peran.ubah');
+        Route::delete('/peran/{role}', [PeranController::class, 'destroy'])->name('peran.destroy')->middleware('permission:peran.hapus');
+        Route::put('/peran/kelola-hak-akses/{role}', [PeranController::class, 'kelolaHakAkses'])->name('peran.kelola-hak-akses')->middleware('permission:peran.kelola-hak-akses');
 
         Route::get('/hak-akses', [HakAksesController::class, 'index'])->name('hak-akses')->middleware('permission:hak-akses');
-        Route::get('/hak-akses/{permission}', [HakAksesController::class, 'show'])->name('hak-akses.show')->middleware('permission:detail-hak-akses');
-        Route::post('/hak-akses', [HakAksesController::class, 'store'])->name('hak-akses.store')->middleware('permission:tambah-hak-akses');
-        Route::put('/hak-akses/{permission}', [HakAksesController::class, 'update'])->name('hak-akses.update')->middleware('permission:ubah-hak-akses');
-        Route::delete('/hak-akses/{permission}', [HakAksesController::class, 'destroy'])->name('hak-akses.destroy')->middleware('permission:hapus-hak-akses');
+        Route::get('/hak-akses/{permission}', [HakAksesController::class, 'show'])->name('hak-akses.show')->middleware('permission:hak-akses.detail');
+        Route::post('/hak-akses', [HakAksesController::class, 'store'])->name('hak-akses.store')->middleware('permission:hak-akses.tambah');
+        Route::put('/hak-akses/{permission}', [HakAksesController::class, 'update'])->name('hak-akses.update')->middleware('permission:hak-akses.ubah');
+        Route::delete('/hak-akses/{permission}', [HakAksesController::class, 'destroy'])->name('hak-akses.destroy')->middleware('permission:hak-akses.hapus');
     });
 });
