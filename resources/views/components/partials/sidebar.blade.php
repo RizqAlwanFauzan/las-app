@@ -31,14 +31,22 @@
                     </a>
                 </li>
                 <li class="nav-header">Manajemen Pengguna</li>
-                <li class="nav-item {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'active' : '' }}">
+                <li class="nav-item {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.peran', 'manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs(['manajemen-pengguna.peran-hak-akses.peran', 'manajemen-pengguna.peran-hak-akses.hak-akses']) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-tag"></i>
                         <p>
                             Peran & Hak Akses
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('manajemen-pengguna.peran-hak-akses.peran') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.peran-hak-akses.peran') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Peran</p>
+                            </a>
+                        </li>
+                    </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('manajemen-pengguna.peran-hak-akses.hak-akses') }}" class="nav-link {{ request()->routeIs('manajemen-pengguna.peran-hak-akses.hak-akses') ? 'active' : '' }}">
